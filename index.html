@@ -30,13 +30,37 @@
     </script>
 
     <style>
-        body { -webkit-tap-highlight-color: transparent; }
+        body { -webkit-tap-highlight-color: transparent; overflow-x: hidden; }
         .active-tab { color: #E4A934 !important; border-top: 3px solid #E4A934; }
         .tab-content { display: none; animation: fadeIn 0.3s ease-in-out; }
         .tab-content.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         .glass-effect { background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(10px); }
-        .safe-area-bottom { padding-bottom: calc(env(safe-area-inset-bottom) + 70px); }
+        .safe-area-bottom { padding-bottom: calc(env(safe-area-inset-bottom) + 80px); }
+        
+        /* Estilos para el Iframe Responsivo */
+        .form-container {
+            position: relative;
+            width: 100%;
+            height: calc(100vh - 180px); /* Ajuste dinámico según header/footer */
+            overflow: hidden;
+            border-radius: 1rem;
+        }
+        .form-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        /* Spinner de carga */
+        .loader {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #E4A934;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
     </style>
 
     <!-- PWA Meta Tags -->
@@ -49,9 +73,8 @@
     <!-- HEADER FIJO -->
     <header class="fixed top-0 w-full z-50 bg-rufinistaBlue text-white shadow-lg h-20 px-4 flex items-center">
         <div class="flex items-center space-x-3 w-full">
-            <img src="https://drive.google.com/file/d/1foatOKmiBHu9_BzlHB9b2WrQgi6AuS2L/view?usp=sharing" 
-                 alt="Logo" class="h-14 w-auto object-contain bg-white rounded-full p-1 border-2 border-rufinistaYellow"
-                 onerror="this.src='https://via.placeholder.com/60?text=RJC'">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/4/4b/Escudo_del_Colegio_Rufino_Jos%C3%A9_Cuervo.png" 
+                 alt="Logo" class="h-14 w-auto object-contain bg-white rounded-full p-1 border-2 border-rufinistaYellow">
             <div class="flex flex-col">
                 <h1 class="text-lg font-bold leading-none">Encuentro Rufinista 2026</h1>
                 <p class="text-[10px] text-rufinistaGreen uppercase tracking-wider font-semibold mt-1">Educación, Tecnología y Territorio</p>
@@ -64,61 +87,71 @@
 
         <!-- SECCIÓN 1: INICIO -->
         <section id="inicio" class="tab-content active space-y-6">
-            <div class="bg-gradient-to-br from-rufinistaBlue to-blue-900 text-white p-6 rounded-3xl shadow-xl relative overflow-hidden">
-                <div class="relative z-10">
-                    <p class="text-rufinistaYellow font-bold mb-2 uppercase text-sm italic">"Juntos hacemos escuela, juntos transformamos futuro"</p>
-                    <h2 class="text-2xl font-extrabold mb-4 leading-tight">Conectar saberes, construir territorio, transformar realidades.</h2>
+            
+            <!-- SUB-VISTA: CONTENIDO INFORMATIVO -->
+            <div id="inicio-info" class="space-y-6">
+                <div class="bg-gradient-to-br from-rufinistaBlue to-blue-900 text-white p-6 rounded-3xl shadow-xl relative overflow-hidden">
+                    <div class="relative z-10">
+                        <p class="text-rufinistaYellow font-bold mb-2 uppercase text-sm italic">"Juntos hacemos escuela, juntos transformamos futuro"</p>
+                        <h2 class="text-2xl font-extrabold mb-4 leading-tight">Conectar saberes, construir territorio, transformar realidades.</h2>
+                    </div>
                 </div>
-                <div class="absolute -right-10 -bottom-10 opacity-20 text-9xl">
-                    <i class="fas fa-graduation-cap"></i>
+
+                <div class="grid grid-cols-2 gap-3 text-center">
+                    <div class="bg-white p-4 rounded-2xl shadow-sm border-l-4 border-rufinistaGreen">
+                        <p class="text-xs text-gray-500 font-bold uppercase mb-1">Fecha</p>
+                        <p class="font-bold text-rufinistaBlue italic">09 JUN 2026</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-2xl shadow-sm border-l-4 border-rufinistaBlue">
+                        <p class="text-xs text-gray-500 font-bold uppercase mb-1">Lugar</p>
+                        <p class="font-bold text-rufinistaBlue italic">Sede C</p>
+                    </div>
+                </div>
+
+                <!-- BOTÓN QUE ACTIVA EL FORMULARIO -->
+                <button onclick="toggleRegistro(true)" class="block w-full bg-rufinistaYellow hover:bg-yellow-500 text-rufinistaBlue font-black text-center py-5 rounded-2xl shadow-lg transform active:scale-95 transition-all text-lg flex items-center justify-center gap-3">
+                    <i class="fas fa-edit"></i>
+                    REGISTRARME COMO ASISTENTE
+                </button>
+
+                <div class="space-y-3">
+                    <h3 class="text-rufinistaBlue font-bold text-lg px-2 flex items-center gap-2">
+                        <span class="w-2 h-6 bg-rufinistaGreen rounded-full"></span>
+                        ¿Por qué participar?
+                    </h3>
+                    <div class="grid gap-2 text-sm">
+                        <div class="bg-white p-4 rounded-xl shadow-sm flex items-center gap-3 border border-gray-100">
+                            <i class="fas fa-check-circle text-rufinistaGreen"></i> Porque la educación se construye en comunidad.
+                        </div>
+                        <div class="bg-white p-4 rounded-xl shadow-sm flex items-center gap-3 border border-gray-100">
+                            <i class="fas fa-check-circle text-rufinistaGreen"></i> Porque juntos impulsamos nuestro territorio.
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <!-- TARJETA FECHA/LUGAR -->
-            <div class="grid grid-cols-2 gap-3">
-                <div class="bg-white p-4 rounded-2xl shadow-sm border-l-4 border-rufinistaGreen text-center">
-                    <p class="text-xs text-gray-500 uppercase font-bold tracking-tighter leading-none mb-1">Fecha</p>
-                    <p class="font-bold text-rufinistaBlue leading-none italic">09 JUN 2026</p>
+            <!-- SUB-VISTA: FORMULARIO INCRUSTADO (Oculto por defecto) -->
+            <div id="inicio-registro" class="hidden space-y-4">
+                <div class="flex items-center justify-between">
+                    <button onclick="toggleRegistro(false)" class="text-rufinistaBlue font-bold flex items-center gap-2 px-2 py-1">
+                        <i class="fas fa-arrow-left"></i> Volver al inicio
+                    </button>
+                    <span class="text-xs font-bold text-rufinistaGreen bg-green-50 px-3 py-1 rounded-full border border-green-100">Registro en línea</span>
                 </div>
-                <div class="bg-white p-4 rounded-2xl shadow-sm border-l-4 border-rufinistaBlue text-center">
-                    <p class="text-xs text-gray-500 uppercase font-bold tracking-tighter leading-none mb-1">Lugar</p>
-                    <p class="font-bold text-rufinistaBlue leading-none italic">Sede C</p>
-                </div>
-            </div>
-
-            <!-- BOTÓN REGISTRO -->
-            <a href="#" target="_blank" class="block w-full bg-rufinistaYellow hover:bg-yellow-500 text-rufinistaBlue font-black text-center py-5 rounded-2xl shadow-lg transform active:scale-95 transition-all text-lg flex items-center justify-center gap-3">
-                <i class="fas fa-id-card"></i>
-                REGISTRARME COMO ASISTENTE
-            </a>
-
-            <!-- ¿POR QUÉ PARTICIPAR? -->
-            <div class="space-y-3">
-                <h3 class="text-rufinistaBlue font-bold text-lg px-2 flex items-center gap-2">
-                    <span class="w-2 h-6 bg-rufinistaGreen rounded-full"></span>
-                    ¿Por qué participar?
-                </h3>
-                <div class="space-y-2">
-                    <div class="bg-white p-4 rounded-xl flex items-start gap-4 shadow-sm border border-gray-100">
-                        <div class="text-rufinistaGreen mt-1"><i class="fas fa-users"></i></div>
-                        <p class="text-sm font-medium">Porque la educación se construye en comunidad.</p>
+                
+                <div class="form-container bg-white shadow-inner flex flex-col items-center justify-center">
+                    <!-- Spinner que se ve mientras carga el iframe -->
+                    <div id="loading-form" class="absolute flex flex-col items-center gap-2">
+                        <div class="loader"></div>
+                        <p class="text-xs text-gray-400 font-medium">Cargando formulario...</p>
                     </div>
-                    <div class="bg-white p-4 rounded-xl flex items-start gap-4 shadow-sm border border-gray-100">
-                        <div class="text-rufinistaGreen mt-1"><i class="fas fa-lightbulb"></i></div>
-                        <p class="text-sm font-medium">Porque compartir experiencias nos inspira y nos hace crecer.</p>
-                    </div>
-                    <div class="bg-white p-4 rounded-xl flex items-start gap-4 shadow-sm border border-gray-100">
-                        <div class="text-rufinistaGreen mt-1"><i class="fas fa-laptop-code"></i></div>
-                        <p class="text-sm font-medium">Porque la tecnología y la innovación abren nuevas oportunidades.</p>
-                    </div>
-                    <div class="bg-white p-4 rounded-xl flex items-start gap-4 shadow-sm border border-gray-100">
-                        <div class="text-rufinistaGreen mt-1"><i class="fas fa-map-marked-alt"></i></div>
-                        <p class="text-sm font-medium">Porque juntos impulsamos el desarrollo de nuestro territorio.</p>
-                    </div>
-                    <div class="bg-white p-4 rounded-xl flex items-start gap-4 shadow-sm border border-gray-100">
-                        <div class="text-rufinistaGreen mt-1"><i class="fas fa-bullhorn"></i></div>
-                        <p class="text-sm font-medium">Porque cada voz cuenta y cada aporte transforma.</p>
-                    </div>
+                    <!-- REEMPLAZA ESTE SRC POR TU ENLACE DE GOOGLE FORM (Asegúrate que termine en /viewform?embedded=true) -->
+                    <iframe 
+                        id="google-form"
+                        src="https://docs.google.com/forms/d/e/1FAIpQLSeI8_4_D_8uwuyp7pkwJ_6_No9zAtnuS5adaW1vBAm5SLGbaQ/viewform?embedded=true" 
+                        onload="document.getElementById('loading-form').style.display='none'">
+                        Cargando…
+                    </iframe>
                 </div>
             </div>
         </section>
@@ -126,148 +159,64 @@
         <!-- SECCIÓN 2: AGENDA -->
         <section id="agenda" class="tab-content space-y-6">
             <h3 class="text-2xl font-bold text-rufinistaBlue">Orden del Día</h3>
-            <div class="relative border-l-2 border-rufinistaGreen ml-3 pl-6 space-y-8">
-                <!-- Timeline Items -->
-                <div class="relative">
-                    <div class="absolute -left-[33px] bg-rufinistaGreen w-4 h-4 rounded-full border-4 border-white"></div>
-                    <p class="text-xs font-bold text-rufinistaGreen uppercase italic">Inicio</p>
-                    <h4 class="font-bold text-rufinistaBlue">Registro de asistentes</h4>
-                </div>
-                <div class="relative">
-                    <div class="absolute -left-[33px] bg-rufinistaBlue w-4 h-4 rounded-full border-4 border-white"></div>
-                    <h4 class="font-bold text-gray-800 leading-tight">Instalación del Foro (Palabras de Rectoría)</h4>
-                </div>
-                <div class="relative text-rufinistaBlue">
-                    <div class="absolute -left-[33px] bg-rufinistaYellow w-4 h-4 rounded-full border-4 border-white"></div>
-                    <h4 class="font-bold leading-tight">Conferencia Central</h4>
-                </div>
-                <div class="relative bg-white p-4 rounded-xl shadow-sm">
-                    <div class="absolute -left-[33px] top-4 bg-rufinistaGreen w-4 h-4 rounded-full border-4 border-white"></div>
-                    <h4 class="font-bold text-gray-800 leading-tight">Ponencias</h4>
-                    <p class="text-xs text-gray-500 mt-1 italic">Proyectos docentes y estudiantes (20 min exp / 10 min preguntas)</p>
-                </div>
-                <div class="relative">
-                    <div class="absolute -left-[33px] bg-rufinistaBlue w-4 h-4 rounded-full border-4 border-white"></div>
-                    <h4 class="font-bold text-gray-800 leading-tight">Conversatorio</h4>
-                    <p class="text-sm text-rufinistaBlue italic">“La escuela Rufinista en tiempos digitales”</p>
-                    <p class="text-[10px] text-gray-500">Modera: María Amparo Arias Parra</p>
-                </div>
-                <div class="relative">
-                    <div class="absolute -left-[33px] bg-rufinistaGreen w-4 h-4 rounded-full border-4 border-white"></div>
-                    <h4 class="font-bold text-gray-800 leading-tight">Mesas de trabajo temáticas</h4>
-                </div>
-                <div class="relative">
-                    <div class="absolute -left-[33px] bg-rufinistaBlue w-4 h-4 rounded-full border-4 border-white"></div>
-                    <h4 class="font-bold text-gray-800 leading-tight">Socialización de conclusiones</h4>
-                </div>
-                <div class="relative border-2 border-rufinistaYellow p-3 rounded-xl bg-yellow-50">
-                    <div class="absolute -left-[35px] top-4 bg-rufinistaYellow w-4 h-4 rounded-full border-4 border-white shadow-sm"></div>
-                    <h4 class="font-bold text-rufinistaBlue leading-tight italic">Elección de experiencia para el Foro Local</h4>
-                </div>
-                <div class="relative">
-                    <div class="absolute -left-[33px] bg-gray-400 w-4 h-4 rounded-full border-4 border-white"></div>
-                    <h4 class="font-bold text-gray-400 leading-tight italic">Clausura</h4>
-                </div>
+            <div class="relative border-l-2 border-rufinistaGreen ml-3 pl-6 space-y-8 text-sm">
+                <div class="relative"><div class="absolute -left-[33px] bg-rufinistaGreen w-4 h-4 rounded-full border-4 border-white"></div><h4 class="font-bold">1. Registro de asistentes</h4></div>
+                <div class="relative"><div class="absolute -left-[33px] bg-rufinistaBlue w-4 h-4 rounded-full border-4 border-white"></div><h4 class="font-bold">2. Instalación del Foro</h4></div>
+                <div class="relative"><div class="absolute -left-[33px] bg-rufinistaYellow w-4 h-4 rounded-full border-4 border-white"></div><h4 class="font-bold italic">3. Conferencia Central</h4></div>
+                <div class="relative"><div class="absolute -left-[33px] bg-rufinistaGreen w-4 h-4 rounded-full border-4 border-white"></div><h4 class="font-bold">4. Ponencias Proyectos</h4></div>
+                <div class="relative"><div class="absolute -left-[33px] bg-rufinistaBlue w-4 h-4 rounded-full border-4 border-white"></div><h4 class="font-bold italic text-rufinistaBlue italic">5. Conversatorio: La escuela en tiempos digitales</h4></div>
+                <div class="relative"><div class="absolute -left-[33px] bg-rufinistaGreen w-4 h-4 rounded-full border-4 border-white"></div><h4 class="font-bold">6. Mesas de trabajo</h4></div>
+                <div class="relative"><div class="absolute -left-[33px] bg-rufinistaBlue w-4 h-4 rounded-full border-4 border-white"></div><h4 class="font-bold">7. Conclusiones</h4></div>
+                <div class="relative bg-yellow-50 p-3 rounded-xl border border-rufinistaYellow"><div class="absolute -left-[35px] bg-rufinistaYellow w-4 h-4 rounded-full border-4 border-white"></div><h4 class="font-bold italic">8. Elección Experiencia Foro Local</h4></div>
+                <div class="relative"><div class="absolute -left-[33px] bg-gray-400 w-4 h-4 rounded-full border-4 border-white"></div><h4 class="font-bold text-gray-400">9. Clausura</h4></div>
             </div>
         </section>
 
-        <!-- SECCIÓN 3: LÍNEAS Y PÓSTERES -->
+        <!-- SECCIÓN 3: LÍNEAS -->
         <section id="lineas" class="tab-content space-y-8">
-            <div>
-                <h3 class="text-xl font-bold text-rufinistaBlue mb-4 border-b-2 border-rufinistaYellow pb-1 inline-block italic">Líneas Temáticas</h3>
-                <div class="grid gap-3">
-                    <div class="bg-rufinistaBlue text-white p-4 rounded-2xl flex items-center gap-4">
-                        <span class="text-2xl font-black text-rufinistaYellow opacity-50 italic">01</span>
-                        <p class="text-sm font-semibold italic uppercase tracking-tight leading-none">Educación y tecnología</p>
-                    </div>
-                    <div class="bg-rufinistaGreen text-white p-4 rounded-2xl flex items-center gap-4">
-                        <span class="text-2xl font-black text-white opacity-40 italic">02</span>
-                        <p class="text-sm font-semibold italic uppercase tracking-tight leading-none">Ciudadanía digital y uso responsable</p>
-                    </div>
-                    <div class="bg-rufinistaYellow text-rufinistaBlue p-4 rounded-2xl flex items-center gap-4">
-                        <span class="text-2xl font-black text-rufinistaBlue opacity-40 italic">03</span>
-                        <p class="text-sm font-semibold italic uppercase tracking-tight leading-none">Convivencia y bienestar socioemocional</p>
-                    </div>
-                    <div class="bg-gray-100 text-rufinistaBlue p-4 rounded-2xl border-2 border-rufinistaBlue flex items-center gap-4">
-                        <span class="text-2xl font-black text-rufinistaBlue opacity-30 italic">04</span>
-                        <p class="text-sm font-semibold italic uppercase tracking-tight leading-none">Comunidad, territorio y participación</p>
-                    </div>
-                    <div class="bg-blue-50 text-rufinistaBlue p-4 rounded-2xl border-l-8 border-rufinistaBlue flex items-center gap-4">
-                        <span class="text-2xl font-black text-rufinistaBlue opacity-30 italic">05</span>
-                        <p class="text-sm font-semibold italic uppercase tracking-tight leading-none">Medios y cultura digital</p>
-                    </div>
-                </div>
+            <h3 class="text-xl font-bold text-rufinistaBlue italic">Líneas Temáticas</h3>
+            <div class="grid gap-3">
+                <div class="bg-rufinistaBlue text-white p-4 rounded-2xl flex items-center gap-4 text-sm font-bold italic uppercase"><span class="text-rufinistaYellow">01</span> Educación y tecnología</div>
+                <div class="bg-rufinistaGreen text-white p-4 rounded-2xl flex items-center gap-4 text-sm font-bold italic uppercase"><span>02</span> Ciudadanía digital</div>
+                <div class="bg-rufinistaYellow text-rufinistaBlue p-4 rounded-2xl flex items-center gap-4 text-sm font-bold italic uppercase"><span>03</span> Convivencia y bienestar</div>
+                <div class="bg-white border-2 border-rufinistaBlue p-4 rounded-2xl flex items-center gap-4 text-sm font-bold italic uppercase text-rufinistaBlue"><span>04</span> Comunidad y territorio</div>
+                <div class="bg-blue-50 border-l-8 border-rufinistaBlue p-4 rounded-2xl flex items-center gap-4 text-sm font-bold italic uppercase text-rufinistaBlue"><span>05</span> Medios y cultura digital</div>
             </div>
-
+            
             <div class="bg-white p-6 rounded-3xl shadow-md border-t-4 border-rufinistaGreen">
-                <h3 class="font-black text-rufinistaBlue text-lg mb-3">REQUISITOS DE PÓSTERES</h3>
-                <p class="text-sm text-gray-600 mb-4 italic">Afiches para visibilizar avances de experiencias significativas.</p>
-                <ul class="text-sm space-y-2 mb-6">
-                    <li class="flex items-center gap-2"><i class="fas fa-check-circle text-rufinistaGreen"></i> Problema Identificado</li>
-                    <li class="flex items-center gap-2"><i class="fas fa-check-circle text-rufinistaGreen"></i> Descripción de la Experiencia</li>
-                    <li class="flex items-center gap-2"><i class="fas fa-check-circle text-rufinistaGreen"></i> Resultados Obtenidos</li>
-                    <li class="flex items-center gap-2"><i class="fas fa-check-circle text-rufinistaGreen"></i> Reflexión y Recomendaciones</li>
-                </ul>
-                <button class="w-full bg-rufinistaBlue text-white py-4 rounded-xl font-bold flex items-center justify-center gap-2 shadow-lg italic">
-                    <i class="fas fa-file-pdf"></i>
-                    Convocatoria Completa
-                </button>
+                <h3 class="font-black text-rufinistaBlue text-lg mb-3">POSTERES</h3>
+                <p class="text-xs text-gray-600 mb-4">Requisitos: Problema, Experiencia, Resultados y Reflexión.</p>
+                <button class="w-full bg-rufinistaBlue text-white py-4 rounded-xl font-bold italic shadow-lg">Descargar Convocatoria</button>
             </div>
         </section>
 
         <!-- SECCIÓN 4: MESAS -->
         <section id="mesas" class="tab-content space-y-6">
             <h3 class="text-2xl font-bold text-rufinistaBlue italic">Mesas de Reflexión</h3>
-            <div class="grid gap-4">
-                <!-- Mesa Card -->
-                <div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 relative">
-                    <div class="bg-blue-100 text-rufinistaBlue w-10 h-10 rounded-full flex items-center justify-center mb-3">
-                        <i class="fas fa-robot"></i>
-                    </div>
-                    <h4 class="font-bold text-rufinistaBlue mb-1">Inteligencia Artificial</h4>
-                    <p class="text-xs text-gray-500 italic uppercase tracking-tight leading-none">Explorando fronteras pedagógicas</p>
+            <div class="grid grid-cols-1 gap-4">
+                <div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 flex items-center gap-4">
+                    <i class="fas fa-robot text-2xl text-blue-500"></i>
+                    <div><h4 class="font-bold text-rufinistaBlue leading-none">IA en Educación</h4></div>
                 </div>
-                
-                <div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100">
-                    <div class="bg-green-100 text-rufinistaGreen w-10 h-10 rounded-full flex items-center justify-center mb-3">
-                        <i class="fas fa-chalkboard-teacher"></i>
-                    </div>
-                    <h4 class="font-bold text-rufinistaBlue mb-1 italic leading-none">Rol docente en tiempos digitales</h4>
+                <div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 flex items-center gap-4">
+                    <i class="fas fa-heart text-2xl text-red-500"></i>
+                    <div><h4 class="font-bold text-rufinistaBlue leading-none">Bienestar Digital</h4></div>
                 </div>
-
-                <div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100">
-                    <div class="bg-yellow-100 text-rufinistaYellow w-10 h-10 rounded-full flex items-center justify-center mb-3">
-                        <i class="fas fa-handshake"></i>
-                    </div>
-                    <h4 class="font-bold text-rufinistaBlue mb-1 italic leading-none">Convivencia digital</h4>
-                </div>
-
-                <div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100">
-                    <div class="bg-indigo-100 text-indigo-600 w-10 h-10 rounded-full flex items-center justify-center mb-3">
-                        <i class="fas fa-rocket"></i>
-                    </div>
-                    <h4 class="font-bold text-rufinistaBlue mb-1 italic leading-none">Innovación pedagógica</h4>
-                </div>
-
-                <div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100">
-                    <div class="bg-red-100 text-red-500 w-10 h-10 rounded-full flex items-center justify-center mb-3">
-                        <i class="fas fa-heart"></i>
-                    </div>
-                    <h4 class="font-bold text-rufinistaBlue mb-1 italic leading-none">Bienestar socioemocional</h4>
+                <div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 flex items-center gap-4">
+                    <i class="fas fa-users text-2xl text-green-500"></i>
+                    <div><h4 class="font-bold text-rufinistaBlue leading-none">Innovación Rufinista</h4></div>
                 </div>
             </div>
-
-            <div class="mt-8 bg-rufinistaBlue p-6 rounded-3xl text-center shadow-xl">
-                <i class="fas fa-pen-nib text-rufinistaYellow text-3xl mb-3"></i>
-                <h4 class="text-white font-bold text-lg mb-2">Hacia la "Declaración Rufinista 2026"</h4>
-                <p class="text-blue-100 text-sm leading-tight italic">Tus aportes en las mesas serán la base del manifiesto institucional del futuro.</p>
+            <div class="mt-8 bg-rufinistaBlue p-8 rounded-3xl text-center shadow-xl">
+                <h4 class="text-white font-bold text-lg mb-2 italic uppercase">Declaración 2026</h4>
+                <p class="text-blue-100 text-xs italic leading-tight">Tu participación en las mesas construye el manifiesto de nuestra comunidad.</p>
             </div>
         </section>
 
     </main>
 
     <!-- NAVEGACIÓN INFERIOR -->
-    <nav class="fixed bottom-0 w-full glass-effect border-t border-gray-200 h-[70px] px-6 flex items-center justify-between z-50">
+    <nav class="fixed bottom-0 w-full glass-effect border-t border-gray-200 h-[75px] px-6 flex items-center justify-between z-50">
         <button onclick="switchTab('inicio', this)" class="flex flex-col items-center text-gray-400 active-tab pt-2 transition-all">
             <i class="fas fa-home text-xl"></i>
             <span class="text-[10px] font-bold uppercase mt-1">Inicio</span>
@@ -287,47 +236,49 @@
     </nav>
 
     <script>
-        // Función para cambiar de pestaña
+        // Función para cambiar de pestaña principal
         function switchTab(tabId, el) {
-            // Ocultar todos los contenidos
-            document.querySelectorAll('.tab-content').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            // Quitar clase activa de botones
-            document.querySelectorAll('nav button').forEach(btn => {
-                btn.classList.remove('active-tab');
-            });
-
-            // Mostrar contenido seleccionado
-            document.getElementById(tabId).classList.add('active');
-            // Activar botón seleccionado
-            el.classList.add('active-tab');
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('nav button').forEach(btn => btn.classList.remove('active-tab'));
             
-            // Scroll al inicio
+            document.getElementById(tabId).classList.add('active');
+            el.classList.add('active-tab');
+
+            // Si cambiamos de pestaña, nos aseguramos de resetear la vista de registro si estaba abierta
+            if(tabId !== 'inicio') {
+                toggleRegistro(false);
+            }
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // --- REGISTRO DE SERVICE WORKER PARA PWA ---
+        // Función para alternar entre Info e Iframe de Registro
+        function toggleRegistro(show) {
+            const infoView = document.getElementById('inicio-info');
+            const registroView = document.getElementById('inicio-registro');
+            
+            if (show) {
+                infoView.classList.add('hidden');
+                registroView.classList.remove('hidden');
+            } else {
+                infoView.classList.remove('hidden');
+                registroView.classList.add('hidden');
+            }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // --- PWA SERVICE WORKER ---
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 const swCode = `
-                    const CACHE_NAME = 'rufinista-v1';
+                    const CACHE_NAME = 'rufinista-v2';
                     const assets = ['./', './index.html'];
-                    self.addEventListener('install', e => {
-                        e.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(assets)));
-                    });
-                    self.addEventListener('fetch', e => {
-                        e.respondWith(caches.match(e.request).then(res => res || fetch(e.request)));
-                    });
+                    self.addEventListener('install', e => e.waitUntil(caches.open(CACHE_NAME).then(c => c.addAll(assets))));
+                    self.addEventListener('fetch', e => e.respondWith(caches.match(e.request).then(r => r || fetch(e.request))));
                 `;
                 const blob = new Blob([swCode], { type: 'application/javascript' });
-                const swUrl = URL.createObjectURL(blob);
-                navigator.serviceWorker.register(swUrl).then(() => {
-                    console.log('PWA: Service Worker Activo');
-                }).catch(err => console.log('PWA: Error', err));
+                navigator.serviceWorker.register(URL.createObjectURL(blob));
             });
         }
     </script>
-
 </body>
 </html>
