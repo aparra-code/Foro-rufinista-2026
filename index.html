@@ -262,6 +262,26 @@
                 <p class="text-blue-100 text-xs italic leading-tight">Tu participación en las mesas construye el manifiesto de nuestra comunidad.</p>
             </div>
         </section>
+        <!-- PESTAÑA 5: CONTÁCTANOS -->
+<section id="contacto" class="tab-content h-[calc(100vh-180px)] space-y-4">
+    <div class="bg-white p-4 rounded-xl shadow-sm text-center border-b-2 border-[#7AA95C]">
+        <h2 class="text-lg font-bold text-[#0F2C59]">¿Tienes dudas o inconvenientes?</h2>
+        <p class="text-xs text-gray-500">Escríbenos y el Comité Académico Central te responderá lo antes posible.</p>
+    </div>
+    
+    <div class="w-full h-[calc(100%-80px)] bg-white rounded-xl overflow-hidden shadow-inner">
+        <!-- Reemplaza el src de abajo por el de tu Google Forms de contacto (el de Incorporar HTML) -->
+        <iframe 
+            src="https://docs.google.com/forms/d/e/1FAIpQLSfzOLC1fsEm8XiIKKz9H3EbH7LSZ4bJEyNLaKiLFIGGFSCPqw/viewform?embedded=true" 
+            width="100%" 
+            height="100%" 
+            frameborder="0" 
+            marginheight="0" 
+            marginwidth="0">
+            Cargando formulario de contacto...
+        </iframe>
+    </div>
+</section>
 
     </main>
 
@@ -283,6 +303,10 @@
             <i class="fas fa-comments text-xl"></i>
             <span class="text-[10px] font-bold uppercase mt-1">Mesas</span>
         </button>
+        <button onclick="switchTab('contacto')" id="btn-contacto" class="flex flex-col items-center gap-1 text-gray-400 py-1 w-full">
+        <i class="fa-solid fa-envelope text-xl"></i>
+        <span class="text-[10px] font-bold">CONTACTO</span>
+    </button>
     </nav>
 
     <script>
