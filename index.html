@@ -115,29 +115,27 @@
                     </div>
                 </div>
 
-                <div class="bg-white p-6 rounded-3xl shadow-sm border-t-4 border-rufinistaYellow text-center">
-    <h3 class="text-rufinistaBlue font-bold text-sm uppercase mb-4 tracking-widest">Faltan para el gran día:</h3>
-    <div class="flex justify-center gap-4">
-        <div class="flex flex-col">
-            <span id="days" class="text-3xl font-black text-rufinistaBlue leading-none">00</span>
-            <span class="text-[10px] text-gray-400 font-bold uppercase mt-1">Días</span>
-        </div>
-        <div class="text-3xl font-black text-rufinistaYellow">:</div>
-        <div class="flex flex-col">
-            <span id="hours" class="text-3xl font-black text-rufinistaBlue leading-none">00</span>
-            <span class="text-[10px] text-gray-400 font-bold uppercase mt-1">Horas</span>
-        </div>
-        <div class="text-3xl font-black text-rufinistaYellow">:</div>
-        <div class="flex flex-col">
-            <span id="minutes" class="text-3xl font-black text-rufinistaBlue leading-none">00</span>
-            <span class="text-[10px] text-gray-400 font-bold uppercase mt-1">Min</span>
-        </div>
-        <div class="text-3xl font-black text-rufinistaYellow">:</div>
-        <div class="flex flex-col">
-            <span id="seconds" class="text-3xl font-black text-rufinistaBlue leading-none">00</span>
-            <span class="text-[10px] text-gray-400 font-bold uppercase mt-1">Seg</span>
-        </div>
+                <!-- CONTENEDOR DE LA CUENTA REGRESIVA -->
+<div id="countdown-container" class="grid grid-cols-4 gap-2 text-center my-4">
+    <div class="bg-[#0F2C59] text-white p-2 rounded-xl">
+        <span id="countdown-days" class="block text-xl font-black">00</span>
+        <span class="text-[10px] uppercase tracking-wide opacity-80">Días</span>
     </div>
+    <div class="bg-[#0F2C59] text-white p-2 rounded-xl">
+        <span id="countdown-hours" class="block text-xl font-black">00</span>
+        <span class="text-[10px] uppercase tracking-wide opacity-80">Horas</span>
+    </div>
+    <div class="bg-[#0F2C59] text-white p-2 rounded-xl">
+        <span id="countdown-minutes" class="block text-xl font-black">00</span>
+        <span class="text-[10px] uppercase tracking-wide opacity-80">Min</span>
+    </div>
+    <div class="bg-[#0F2C59] text-white p-2 rounded-xl">
+        <span id="countdown-seconds" class="block text-xl font-black">00</span>
+        <span class="text-[10px] uppercase tracking-wide opacity-80">Seg</span>
+    </div>
+</div>
+<div id="event-message" class="hidden text-center text-[#0F2C59] font-bold py-2">
+    ¡El Foro Rufinista 2026 ha comenzado! 🎉
 </div>
                 
                 <!-- CORREGIDO: Redirecciona correctamente usando la barra de navegación -->
@@ -403,31 +401,49 @@
                     .catch(err => console.error('Error real de SW:', err));
             });
         }
-        function updateCountdown() {
-    // Definimos la fecha del evento: 9 de Junio de 2026 a las 7:00 AM
-    const eventDate = new Date('June 9, 2026 07:00:00').getTime();
+// CONFIGURACIÓN DE LA FECHA OBJETIVO (Formato universal compatible)
+const targetDate = new Date("2026/09/17 07:00:00").getTime();
+
+function updateCountdown() {
     const now = new Date().getTime();
-    const diff = eventDate - now;
+    const timeLeft = targetDate - now;
 
-    if (diff > 0) {
-        const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-        const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-        const s = Math.floor((diff % (1000 * 60)) / 1000);
+    // Elementos del DOM
+    const dDays = document.getElementById("countdown-days");
+    const dHours = document.getElementById("countdown-hours");
+    const dMinutes = document.getElementById("countdown-minutes");
+    const dSeconds = document.getElementById("countdown-seconds");
+    const cContainer = document.getElementById("countdown-container");
+    const eMessage = document.getElementById("event-message");
 
-        document.getElementById('days').innerText = d < 10 ? '0' + d : d;
-        document.getElementById('hours').innerText = h < 10 ? '0' + h : h;
-        document.getElementById('minutes').innerText = m < 10 ? '0' + m : m;
-        document.getElementById('seconds').innerText = s < 10 ? '0' + s : s;
-    } else {
-        // Cuando llegue la fecha, mostrar que ya inició
-        document.getElementById('inicio-info').querySelector('h3').innerText = "¡EL FORO HA COMENZADO!";
+    // Validar que los elementos existan en la vista actual para evitar errores
+    if (!dDays || !dHours || !dMinutes || !dSeconds) return;
+
+    if (timeLeft <= 0) {
+        // Si la fecha ya pasó o es el día del evento
+        cContainer.classList.add("hidden");
+        if (eMessage) eMessage.classList.remove("hidden");
+        return;
     }
+
+    // Cálculos matemáticos del tiempo
+    const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+    // Inyectar valores formateados con dos dígitos (ej: 05 en vez de 5)
+    dDays.innerText = String(days).padStart(2, '0');
+    dHours.innerText = String(hours).padStart(2, '0');
+    dMinutes.innerText = String(minutes).padStart(2, '0');
+    dSeconds.innerText = String(seconds).padStart(2, '0');
 }
 
-// Actualizar cada segundo
+// Ejecutar inmediatamente al cargar la página para evitar el desfase de 1 segundo
+updateCountdown();
+
+// Actualizar cada segundo de forma continua
 setInterval(updateCountdown, 1000);
-updateCountdown(); // Ejecutar de inmediato al cargar
     </script>
 </body>
 </html>
