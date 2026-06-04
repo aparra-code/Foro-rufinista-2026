@@ -66,14 +66,13 @@
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
     </style>
 
-    <!-- PWA Meta Tags Estándar y Corregidos -->
+    <!-- PWA Meta Tags -->
     <meta name="theme-color" content="#0F2C59">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-title" content="Foro 2026">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     
-    <!-- Enlace único al archivo de identidad de la App -->
-    <link rel="manifest" href="./manifest.json">
+    <link class="manifest" rel="manifest" href="./manifest.json">
 </head>
 <body class="bg-rufinistaGray font-sans text-gray-800 antialiased">
 
@@ -104,6 +103,25 @@
                     </div>
                 </div>
 
+                <!-- NUEVO: CONTENEDOR DE LA CUENTA REGRESIVA -->
+                <div id="countdown-container" class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 text-center">
+                    <p class="text-xs font-bold uppercase text-gray-400 mb-2 tracking-wider">El gran evento inicia en:</p>
+                    <div class="grid grid-cols-3 gap-2 max-w-xs mx-auto">
+                        <div class="bg-gray-50 p-2 rounded-xl">
+                            <span id="countdown-days" class="block text-2xl font-black text-rufinistaBlue">00</span>
+                            <span class="text-[10px] text-gray-400 uppercase font-semibold">Días</span>
+                        </div>
+                        <div class="bg-gray-50 p-2 rounded-xl">
+                            <span id="countdown-hours" class="block text-2xl font-black text-rufinistaGreen">00</span>
+                            <span class="text-[10px] text-gray-400 uppercase font-semibold">Horas</span>
+                        </div>
+                        <div class="bg-gray-50 p-2 rounded-xl">
+                            <span id="countdown-minutes" class="block text-2xl font-black text-rufinistaYellow">00</span>
+                            <span class="text-[10px] text-gray-400 uppercase font-semibold">Minutos</span>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="grid grid-cols-2 gap-3 text-center">
                     <div class="bg-white p-4 rounded-2xl shadow-sm border-l-4 border-rufinistaGreen">
                         <p class="text-xs text-gray-500 font-bold uppercase mb-1">Fecha</p>
@@ -114,9 +132,10 @@
                         <p class="font-bold text-rufinistaBlue italic">Sede C y A</p>
                     </div>
                 </div>
-                <!-- CORREGIDO: Redirecciona correctamente usando la barra de navegación -->
-                <button onclick="switchTab('registro', document.getElementById('btn-registro'))" class="w-full bg-[#E4A934] text-[#0F2C59] font-black text-center py-4 px-6 rounded-2xl shadow-md uppercase tracking-wide text-sm hover:bg-opacity-90 transition active:scale-95 block">
-                    <i class="fa-solid fa-pen-to-square mr-2"></i> REGISTRO
+
+                <!-- CORREGIDO: Ahora abre la sub-vista de registro incrustada directamente en vez de saltar de pestaña -->
+                <button onclick="toggleRegistro(true)" class="w-full bg-[#E4A934] text-[#0F2C59] font-black text-center py-4 px-6 rounded-2xl shadow-md uppercase tracking-wide text-sm hover:bg-opacity-90 transition active:scale-95 block">
+                    <i class="fa-solid fa-pen-to-square mr-2"></i> REGISTRO EN LÍNEA
                 </button>
 
                 <div class="space-y-3">
@@ -162,7 +181,6 @@
                         id="google-form"
                         src="https://docs.google.com/forms/d/e/1FAIpQLSd3AzSPIHUnGScq7L2C8iiaPEoNM2L1B6ANU0dqwa99VW7kcg/viewform?embedded=true" 
                         onload="document.getElementById('loading-form').style.display='none'">
-                        Cargando…
                     </iframe>
                 </div>
             </div>
@@ -188,7 +206,7 @@
             </div>
         </section>
 
-        <!-- SECCIÓN 3: MESAS DE TRABAJO -->
+        <!-- SECCIÓN 3: LÍNEAS TEMÁTICAS Y MESAS DE REFLEXIÓN (CORREGIDO: Unificadas para evitar código muerto) -->
         <section id="lineas" class="tab-content space-y-8">
             <h3 class="text-xl font-bold text-rufinistaBlue italic">Líneas Temáticas</h3>
             <div class="grid gap-3">
@@ -203,7 +221,30 @@
                 <h3 class="font-black text-rufinistaBlue text-lg mb-3">PONENCIAS DE EXPERIENCIAS</h3>
                 <p class="text-xs text-gray-600 mb-4"> Trabajos de investigación o experiencias educativas, en estado terminal o en desarrollo. Tiempo: 20 minutes. Preguntas: 10 minutos.</p>
                 <h3 class="font-black text-rufinistaBlue text-lg mb-3">PÓSTERES</h3>
-                <p class="text-xs text-gray-600 mb-4"> Presentación mediante afiche, cartel o ayuda audiovisual de resultados o avances de una innovación pedagógica o de un trabajo de investigación. Cada póster deberá contener: problema abordado, Experiencia desarrollada, resultados o hallazgos, reflexión pedagógica, recomendaciones. </p>
+                <p class="text-xs text-gray-600 mb-4"> Presentación mediante afiche, cartel o ayuda audiovisual de resultados o avances de una innovación pedagógica o de un trabajo de investigación. Cada póster deberá contener: problema abordado, Experiencia desarrollada, resultados o hallazgos, reflexión pedagógica, recommendations. </p>
+            </div>
+
+            <!-- Contenido de Mesas integrado aquí de forma correcta -->
+            <div class="space-y-4">
+                <h3 class="text-2xl font-bold text-rufinistaBlue italic">Mesas de Reflexión</h3>
+                <div class="grid grid-cols-1 gap-4">
+                    <div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 flex items-center gap-4">
+                        <i class="fas fa-robot text-2xl text-blue-500"></i>
+                        <div><h4 class="font-bold text-rufinistaBlue leading-none">IA en Educación</h4></div>
+                    </div>
+                    <div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 flex items-center gap-4">
+                        <i class="fas fa-heart text-2xl text-red-500"></i>
+                        <div><h4 class="font-bold text-rufinistaBlue leading-none">Bienestar Digital</h4></div>
+                    </div>
+                    <div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 flex items-center gap-4">
+                        <i class="fas fa-users text-2xl text-green-500"></i>
+                        <div><h4 class="font-bold text-rufinistaBlue leading-none">Innovación Rufinista</h4></div>
+                    </div>
+                </div>
+                <div class="bg-rufinistaBlue p-6 rounded-3xl text-center shadow-xl">
+                    <h4 class="text-white font-bold text-lg mb-2 italic uppercase">Declaración 2026</h4>
+                    <p class="text-blue-100 text-xs italic leading-tight">Tu participación en las mesas construye el manifiesto de nuestra comunidad.</p>
+                </div>
             </div>
 
             <div class="bg-white p-5 rounded-2xl shadow-sm space-y-4 border border-gray-100 mt-6">
@@ -252,7 +293,7 @@
             </div>
         </section>
 
-        <!-- PESTAÑA 4: REGISTRO -->
+        <!-- PESTAÑA 4: REGISTRO EXTERNO -->
         <section id="registro" class="tab-content space-y-6 text-center py-12">
             <div class="bg-white p-8 rounded-2xl shadow-sm max-w-sm mx-auto border-t-4 border-[#E4A934]">
                 <div class="w-16 h-16 bg-yellow-100 text-[#E4A934] flex items-center justify-center rounded-full mx-auto mb-4 text-2xl">
@@ -263,35 +304,12 @@
                     Para registrar tu asistencia o subir tus archivos de Ponencias y Pósteres, abre nuestro formulario oficial seguro.
                 </p>
                 <a href="https://docs.google.com/forms/d/e/1FAIpQLSd3AzSPIHUnGScq7L2C8iiaPEoNM2L1B6ANU0dqwa99VW7kcg/viewform" target="_blank" class="block w-full bg-[#0F2C59] text-white font-bold py-3 px-4 rounded-xl shadow-md hover:bg-opacity-90 transition duration-200">
-                    <i class="fa-solid fa-arrow-up-right-from-square mr-2"></i> Abrir Formulario
+                    <i class="fa-solid fa-arrow-up-right-from-square mr-2"></i> Abrir Formulario Externo
                 </a>
             </div>
         </section>
 
-        <!-- SECCIÓN 5: MESAS -->
-        <section id="mesas" class="tab-content space-y-6">
-            <h3 class="text-2xl font-bold text-rufinistaBlue italic">Mesas de Reflexión</h3>
-            <div class="grid grid-cols-1 gap-4">
-                <div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 flex items-center gap-4">
-                    <i class="fas fa-robot text-2xl text-blue-500"></i>
-                    <div><h4 class="font-bold text-rufinistaBlue leading-none">IA en Educación</h4></div>
-                </div>
-                <div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 flex items-center gap-4">
-                    <i class="fas fa-heart text-2xl text-red-500"></i>
-                    <div><h4 class="font-bold text-rufinistaBlue leading-none">Bienestar Digital</h4></div>
-                </div>
-                <div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 flex items-center gap-4">
-                    <i class="fas fa-users text-2xl text-green-500"></i>
-                    <div><h4 class="font-bold text-rufinistaBlue leading-none">Innovación Rufinista</h4></div>
-                </div>
-            </div>
-            <div class="mt-8 bg-rufinistaBlue p-8 rounded-3xl text-center shadow-xl">
-                <h4 class="text-white font-bold text-lg mb-2 italic uppercase">Declaración 2026</h4>
-                <p class="text-blue-100 text-xs italic leading-tight">Tu participación en las mesas construye el manifiesto de nuestra comunidad.</p>
-            </div>
-        </section>
-
-        <!-- PESTAÑA 6: CONTÁCTANOS -->
+        <!-- PESTAÑA 5: CONTÁCTANOS -->
         <section id="contacto" class="tab-content h-[calc(100vh-180px)] space-y-4">
             <div class="bg-white p-4 rounded-xl shadow-sm text-center border-b-2 border-[#7AA95C]">
                 <h2 class="text-lg font-bold text-[#0F2C59]">¿Tienes dudas o inconvenientes?</h2>
@@ -337,15 +355,19 @@
         </button>
     </nav>
 
+    <!-- SCRIPTS -->
     <script>
         // Función para cambiar de pestaña principal
         function switchTab(tabId, el) {
-            if (!el) return; // Validación de seguridad
+            if (!el) return; 
             
             document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
             document.querySelectorAll('nav button').forEach(btn => btn.classList.remove('active-tab'));
             
-            document.getElementById(tabId).classList.add('active');
+            const targetTab = document.getElementById(tabId);
+            if(targetTab) {
+                targetTab.classList.add('active');
+            }
             el.classList.add('active-tab');
 
             if(tabId !== 'inicio') {
@@ -369,7 +391,37 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // --- PWA SERVICE WORKER ESTÁNDAR ---
+        // --- NUEVO: LÓGICA DE LA CUENTA REGRESIVA (9 de Junio de 2026 a las 07:00:00) ---
+        document.addEventListener('DOMContentLoaded', () => {
+            // Formato ISO seguro para compatibilidad móvil (Safari e iOS)
+            const eventDate = new Date('2026-06-09T07:00:00').getTime();
+
+            const timer = setInterval(() => {
+                const now = new Date().getTime();
+                const difference = eventDate - now;
+
+                if (difference <= 0) {
+                    clearInterval(timer);
+                    document.getElementById('countdown-container').innerHTML = `
+                        <p class="text-sm font-bold text-rufinistaGreen uppercase tracking-wide animate-pulse">
+                            ¡El Foro Educativo ha comenzado oficialmente! 🎉
+                        </p>`;
+                    return;
+                }
+
+                // Operaciones matemáticas de conversión de tiempo
+                const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+
+                // Inyección segura con formato de dos dígitos (01, 02, etc.)
+                document.getElementById('countdown-days').innerText = days.toString().padStart(2, '0');
+                document.getElementById('countdown-hours').innerText = hours.toString().padStart(2, '0');
+                document.getElementById('countdown-minutes').innerText = minutes.toString().padStart(2, '0');
+            }, 1000);
+        });
+
+        // --- PWA SERVICE WORKER ---
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('./sw.js')
