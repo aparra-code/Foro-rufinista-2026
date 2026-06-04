@@ -114,32 +114,6 @@
                         <p class="font-bold text-rufinistaBlue italic">Sede C y A</p>
                     </div>
                 </div>
-
-                <!-- Countdown Timer Card (Excitement builder) -->
-        <div class="bg-white rounded-xl p-4 shadow-sm border border-slate-100 flex flex-col items-center">
-          <div class="text-[11px] font-semibold text-slate-400 font-mono tracking-wider uppercase mb-2">
-            CUENTA REGRESIVA PARA EL FORO
-          </div>
-          <div class="grid grid-cols-4 gap-2 text-center w-full max-w-xs">
-            <div class="bg-slate-50 rounded-lg p-2 border border-slate-100">
-              <span id="countdown-days" class="block text-lg font-bold text-rufinista-blue font-display">00</span>
-              <span class="text-[9px] text-slate-500 uppercase font-medium">Días</span>
-            </div>
-            <div class="bg-slate-50 rounded-lg p-2 border border-slate-100">
-              <span id="countdown-hours" class="block text-lg font-bold text-rufinista-blue font-display">00</span>
-              <span class="text-[9px] text-slate-500 uppercase font-medium">Horas</span>
-            </div>
-            <div class="bg-slate-50 rounded-lg p-2 border border-slate-100">
-              <span id="countdown-minutes" class="block text-lg font-bold text-rufinista-blue font-display">00</span>
-              <span class="text-[9px] text-slate-500 uppercase font-medium">Min</span>
-            </div>
-            <div class="bg-slate-50 rounded-lg p-2 border border-slate-100">
-              <span id="countdown-seconds" class="block text-lg font-bold text-rufinista-blue font-display">00</span>
-              <span class="text-[9px] text-slate-500 uppercase font-medium">Seg</span>
-            </div>
-          </div>
-        </div>
-                
                 <!-- CORREGIDO: Redirecciona correctamente usando la barra de navegación -->
                 <button onclick="switchTab('registro', document.getElementById('btn-registro'))" class="w-full bg-[#E4A934] text-[#0F2C59] font-black text-center py-4 px-6 rounded-2xl shadow-md uppercase tracking-wide text-sm hover:bg-opacity-90 transition active:scale-95 block">
                     <i class="fa-solid fa-pen-to-square mr-2"></i> REGISTRO
@@ -403,37 +377,6 @@
                     .catch(err => console.error('Error real de SW:', err));
             });
         }
-// 6. Countdown Timer Logic
-    function runCountdownTimer() {
-      // Set the date we're counting down to: June 9, 2026
-      const targetDate = new Date("June 9, 2026 07:00:00").getTime();
-      
-      const timer = setInterval(() => {
-        const now = new Date().getTime();
-        const difference = targetDate - now;
-
-        if (difference < 0) {
-          clearInterval(timer);
-          document.getElementById("countdown-days").innerText = "00";
-          document.getElementById("countdown-hours").innerText = "00";
-          document.getElementById("countdown-minutes").innerText = "00";
-          document.getElementById("countdown-seconds").innerText = "00";
-          return;
-        }
-
-        const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((difference % (1000 * 60)) / 1000);
-
-        document.getElementById("countdown-days").innerText = days.toString().padStart(2, '0');
-        document.getElementById("countdown-hours").innerText = hours.toString().padStart(2, '0');
-        document.getElementById("countdown-minutes").innerText = minutes.toString().padStart(2, '0');
-        document.getElementById("countdown-seconds").innerText = seconds.toString().padStart(2, '0');
-      }, 1000);
-    }
-    runCountdownTimer();
-
     </script>
 </body>
 </html>
