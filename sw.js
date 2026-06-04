@@ -3,8 +3,8 @@ const assets = [
   '/Foro-rufinista-2026/',
   '/Foro-rufinista-2026/index.html',
   '/Foro-rufinista-2026/manifest.json',
-  '/Foro-rufinista-2026/icons/icon-192x192.png',
-  '/Foro-rufinista-2026/icons/icon-512x512.png'
+  '/Foro-rufinista-2026/icons/logo rufino 192.png',
+  '/Foro-rufinista-2026/icons/logo rufino 512.png'
 ];
 
 // Instalar el Service Worker y guardar en memoria los archivos esenciales
