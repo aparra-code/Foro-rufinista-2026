@@ -115,28 +115,30 @@
                     </div>
                 </div>
 
-                <!-- CONTENEDOR DE LA CUENTA REGRESIVA -->
-<div id="countdown-container" class="grid grid-cols-4 gap-2 text-center my-4">
-    <div class="bg-[#0F2C59] text-white p-2 rounded-xl">
-        <span id="countdown-days" class="block text-xl font-black">00</span>
-        <span class="text-[10px] uppercase tracking-wide opacity-80">Días</span>
-    </div>
-    <div class="bg-[#0F2C59] text-white p-2 rounded-xl">
-        <span id="countdown-hours" class="block text-xl font-black">00</span>
-        <span class="text-[10px] uppercase tracking-wide opacity-80">Horas</span>
-    </div>
-    <div class="bg-[#0F2C59] text-white p-2 rounded-xl">
-        <span id="countdown-minutes" class="block text-xl font-black">00</span>
-        <span class="text-[10px] uppercase tracking-wide opacity-80">Min</span>
-    </div>
-    <div class="bg-[#0F2C59] text-white p-2 rounded-xl">
-        <span id="countdown-seconds" class="block text-xl font-black">00</span>
-        <span class="text-[10px] uppercase tracking-wide opacity-80">Seg</span>
-    </div>
-</div>
-<div id="event-message" class="hidden text-center text-[#0F2C59] font-bold py-2">
-    ¡El Foro Rufinista 2026 ha comenzado! 🎉
-</div>
+                <!-- Countdown Timer Card (Excitement builder) -->
+        <div class="bg-white rounded-xl p-4 shadow-sm border border-slate-100 flex flex-col items-center">
+          <div class="text-[11px] font-semibold text-slate-400 font-mono tracking-wider uppercase mb-2">
+            CUENTA REGRESIVA PARA EL FORO
+          </div>
+          <div class="grid grid-cols-4 gap-2 text-center w-full max-w-xs">
+            <div class="bg-slate-50 rounded-lg p-2 border border-slate-100">
+              <span id="countdown-days" class="block text-lg font-bold text-rufinista-blue font-display">00</span>
+              <span class="text-[9px] text-slate-500 uppercase font-medium">Días</span>
+            </div>
+            <div class="bg-slate-50 rounded-lg p-2 border border-slate-100">
+              <span id="countdown-hours" class="block text-lg font-bold text-rufinista-blue font-display">00</span>
+              <span class="text-[9px] text-slate-500 uppercase font-medium">Horas</span>
+            </div>
+            <div class="bg-slate-50 rounded-lg p-2 border border-slate-100">
+              <span id="countdown-minutes" class="block text-lg font-bold text-rufinista-blue font-display">00</span>
+              <span class="text-[9px] text-slate-500 uppercase font-medium">Min</span>
+            </div>
+            <div class="bg-slate-50 rounded-lg p-2 border border-slate-100">
+              <span id="countdown-seconds" class="block text-lg font-bold text-rufinista-blue font-display">00</span>
+              <span class="text-[9px] text-slate-500 uppercase font-medium">Seg</span>
+            </div>
+          </div>
+        </div>
                 
                 <!-- CORREGIDO: Redirecciona correctamente usando la barra de navegación -->
                 <button onclick="switchTab('registro', document.getElementById('btn-registro'))" class="w-full bg-[#E4A934] text-[#0F2C59] font-black text-center py-4 px-6 rounded-2xl shadow-md uppercase tracking-wide text-sm hover:bg-opacity-90 transition active:scale-95 block">
@@ -401,49 +403,37 @@
                     .catch(err => console.error('Error real de SW:', err));
             });
         }
-// CONFIGURACIÓN DE LA FECHA OBJETIVO (Formato universal compatible)
-const targetDate = new Date("2026/09/17 07:00:00").getTime();
+// 6. Countdown Timer Logic
+    function runCountdownTimer() {
+      // Set the date we're counting down to: June 9, 2026
+      const targetDate = new Date("June 9, 2026 07:00:00").getTime();
+      
+      const timer = setInterval(() => {
+        const now = new Date().getTime();
+        const difference = targetDate - now;
 
-function updateCountdown() {
-    const now = new Date().getTime();
-    const timeLeft = targetDate - now;
+        if (difference < 0) {
+          clearInterval(timer);
+          document.getElementById("countdown-days").innerText = "00";
+          document.getElementById("countdown-hours").innerText = "00";
+          document.getElementById("countdown-minutes").innerText = "00";
+          document.getElementById("countdown-seconds").innerText = "00";
+          return;
+        }
 
-    // Elementos del DOM
-    const dDays = document.getElementById("countdown-days");
-    const dHours = document.getElementById("countdown-hours");
-    const dMinutes = document.getElementById("countdown-minutes");
-    const dSeconds = document.getElementById("countdown-seconds");
-    const cContainer = document.getElementById("countdown-container");
-    const eMessage = document.getElementById("event-message");
+        const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((difference % (1000 * 60)) / 1000);
 
-    // Validar que los elementos existan en la vista actual para evitar errores
-    if (!dDays || !dHours || !dMinutes || !dSeconds) return;
-
-    if (timeLeft <= 0) {
-        // Si la fecha ya pasó o es el día del evento
-        cContainer.classList.add("hidden");
-        if (eMessage) eMessage.classList.remove("hidden");
-        return;
+        document.getElementById("countdown-days").innerText = days.toString().padStart(2, '0');
+        document.getElementById("countdown-hours").innerText = hours.toString().padStart(2, '0');
+        document.getElementById("countdown-minutes").innerText = minutes.toString().padStart(2, '0');
+        document.getElementById("countdown-seconds").innerText = seconds.toString().padStart(2, '0');
+      }, 1000);
     }
+    runCountdownTimer();
 
-    // Cálculos matemáticos del tiempo
-    const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
-
-    // Inyectar valores formateados con dos dígitos (ej: 05 en vez de 5)
-    dDays.innerText = String(days).padStart(2, '0');
-    dHours.innerText = String(hours).padStart(2, '0');
-    dMinutes.innerText = String(minutes).padStart(2, '0');
-    dSeconds.innerText = String(seconds).padStart(2, '0');
-}
-
-// Ejecutar inmediatamente al cargar la página para evitar el desfase de 1 segundo
-updateCountdown();
-
-// Actualizar cada segundo de forma continua
-setInterval(updateCountdown, 1000);
     </script>
 </body>
 </html>
