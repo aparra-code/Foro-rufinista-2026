@@ -308,29 +308,29 @@
 
     </main>
 
-    <!-- NAVEGACIÓN INFERIOR -->
-   <nav class="fixed bottom-0 left-0 right-0 bg-white ...">
-      <button onclick="switchTab('inicio', this)" id="btn-inicio" class="active-tab flex flex-col items-center justify-center gap-0.5 text-gray-400 py-1 w-full min-w-0">
-          <i class="fa-solid fa-house text-lg"></i>
-          <span class="text-[9px] font-bold tracking-tighter truncate w-full text-center">INICIO</span>
-      </button>
-      <button onclick="switchTab('agenda', this)" id="btn-agenda" class="flex flex-col items-center justify-center gap-0.5 text-gray-400 py-1 w-full min-w-0">
-          <i class="fa-solid fa-clock text-lg"></i>
-          <span class="text-[9px] font-bold tracking-tighter truncate w-full text-center">AGENDA</span>
-      </button>
-      <button onclick="switchTab('lineas', this)" id="btn-lineas" class="flex flex-col items-center justify-center gap-0.5 text-gray-400 py-1 w-full min-w-0">
-          <i class="fa-solid fa-lightbulb text-lg"></i>
-          <span class="text-[9px] font-bold tracking-tighter truncate w-full text-center">LÍNEAS</span>
-      </button>
-      <button onclick="switchTab('registro', this)" id="btn-registro" class="flex flex-col items-center justify-center gap-0.5 text-gray-400 py-1 w-full min-w-0">
-          <i class="fa-solid fa-pen-to-square text-lg"></i>
-          <span class="text-[9px] font-bold tracking-tighter truncate w-full text-center">REGISTRO</span>
-      </button>
-      <button onclick="switchTab('contacto', this)" id="btn-contacto" class="flex flex-col items-center justify-center gap-0.5 text-gray-400 py-1 w-full min-w-0">
-          <i class="fa-solid fa-envelope text-lg"></i>
-          <span class="text-[9px] font-bold tracking-tighter truncate w-full text-center">CONTACTO</span>
-      </button>
-  </nav>
+<!-- NAVEGACIÓN INFERIOR CORREGIDA -->
+    <nav class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 flex flex-row justify-between items-center px-2 py-1 shadow-[0_-4px_10px_rgba(0,0,0,0.05)] z-50">
+        <button onclick="switchTab('inicio', this)" id="btn-inicio" class="active-tab flex flex-col items-center justify-center gap-0.5 text-gray-400 py-1 w-full min-w-0">
+            <i class="fa-solid fa-house text-lg"></i>
+            <span class="text-[9px] font-bold tracking-tighter truncate w-full text-center">INICIO</span>
+        </button>
+        <button onclick="switchTab('agenda', this)" id="btn-agenda" class="flex flex-col items-center justify-center gap-0.5 text-gray-400 py-1 w-full min-w-0">
+            <i class="fa-solid fa-clock text-lg"></i>
+            <span class="text-[9px] font-bold tracking-tighter truncate w-full text-center">AGENDA</span>
+        </button>
+        <button onclick="switchTab('lineas', this)" id="btn-lineas" class="flex flex-col items-center justify-center gap-0.5 text-gray-400 py-1 w-full min-w-0">
+            <i class="fa-solid fa-lightbulb text-lg"></i>
+            <span class="text-[9px] font-bold tracking-tighter truncate w-full text-center">LÍNEAS</span>
+        </button>
+        <button onclick="switchTab('registro', this)" id="btn-registro" class="flex flex-col items-center justify-center gap-0.5 text-gray-400 py-1 w-full min-w-0">
+            <i class="fa-solid fa-pen-to-square text-lg"></i>
+            <span class="text-[9px] font-bold tracking-tighter truncate w-full text-center">REGISTRO</span>
+        </button>
+        <button onclick="switchTab('contacto', this)" id="btn-contacto" class="flex flex-col items-center justify-center gap-0.5 text-gray-400 py-1 w-full min-w-0">
+            <i class="fa-solid fa-envelope text-lg"></i>
+            <span class="text-[9px] font-bold tracking-tighter truncate w-full text-center">CONTACTO</span>
+        </button>
+    </nav>
     <script>
         // Función para cambiar de pestaña principal
         function switchTab(tabId, el) {
