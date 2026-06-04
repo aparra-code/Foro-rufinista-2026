@@ -1,4 +1,3 @@
-```javascript
 const CACHE_NAME = 'rufinista-v5';
 const assets = [
   '/Foro-rufinista-2026/',
@@ -11,13 +10,17 @@ const assets = [
 // Instalar el Service Worker y guardar en memoria los archivos esenciales
 self.addEventListener('install', e => {
   e.waitUntil(
-    caches.open(CACHE_NAME).then(c => c.addAll(assets))
+    caches.open(CACHE_NAME).then(c => {
+      return c.addAll(assets);
+    })
   );
 });
 
 // Hacer que la app funcione incluso si el usuario se queda sin internet
 self.addEventListener('fetch', e => {
   e.respondWith(
-    caches.match(e.request).then(r => r || fetch(e.request))
+    caches.match(e.request).then(r => {
+      return r || fetch(e.request);
+    })
   );
 });
