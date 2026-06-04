@@ -4,10 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Foro Rufinista 2026</title>
+    
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
     <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -42,7 +45,7 @@
         .form-container {
             position: relative;
             width: 100%;
-            height: calc(100vh - 180px); /* Ajuste dinámico según header/footer */
+            height: calc(100vh - 180px);
             overflow: hidden;
             border-radius: 1rem;
         }
@@ -51,14 +54,6 @@
             height: 100%;
             border: none;
         }
-       <!-- PWA Meta Tags -->
-    <meta name="theme-color" content="#0F2C59">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-title" content="Foro 2026">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    
-    <!-- Enlace al archivo de identidad de la App -->
-    <link rel="manifest" href="./manifest.json">
         /* Spinner de carga */
         .loader {
             border: 4px solid #f3f3f3;
@@ -71,10 +66,14 @@
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
     </style>
 
-    <!-- PWA Meta Tags -->
+    <!-- PWA Meta Tags Estándar y Corregidos -->
     <meta name="theme-color" content="#0F2C59">
-    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="Foro 2026">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
+    <!-- Enlace único al archivo de identidad de la App -->
+    <link rel="manifest" href="./manifest.json">
 </head>
 <body class="bg-rufinistaGray font-sans text-gray-800 antialiased">
 
@@ -116,10 +115,10 @@
                     </div>
                 </div>
 
-                <!-- BOTÓN QUE ACTIVA EL FORMULARIO -->
-                <button onclick="switchTab('registro')" class="w-full bg-[#E4A934] text-[#0F2C59] font-black text-center py-4 px-6 rounded-2xl shadow-md uppercase tracking-wide text-sm hover:bg-opacity-90 transition active:scale-95 block">
+                <!-- CORREGIDO: Redirecciona correctamente usando la barra de navegación -->
+                <button onclick="switchTab('registro', document.getElementById('btn-registro'))" class="w-full bg-[#E4A934] text-[#0F2C59] font-black text-center py-4 px-6 rounded-2xl shadow-md uppercase tracking-wide text-sm hover:bg-opacity-90 transition active:scale-95 block">
                     <i class="fa-solid fa-pen-to-square mr-2"></i> REGISTRO
-                 </button>
+                </button>
 
                 <div class="space-y-3">
                     <h3 class="text-rufinistaBlue font-bold text-lg px-2 flex items-center gap-2">
@@ -146,7 +145,7 @@
                 </div>
             </div>
 
-            <!-- SUB-VISTA: FORMULARIO INCRUSTADO (Oculto por defecto) -->
+            <!-- SUB-VISTA: FORMULARIO INCRUSTADO -->
             <div id="inicio-registro" class="hidden space-y-4">
                 <div class="flex items-center justify-between">
                     <button onclick="toggleRegistro(false)" class="text-rufinistaBlue font-bold flex items-center gap-2 px-2 py-1">
@@ -156,12 +155,10 @@
                 </div>
                 
                 <div class="form-container bg-white shadow-inner flex flex-col items-center justify-center">
-                    <!-- Spinner que se ve mientras carga el iframe -->
                     <div id="loading-form" class="absolute flex flex-col items-center gap-2">
                         <div class="loader"></div>
                         <p class="text-xs text-gray-400 font-medium">Cargando formulario...</p>
                     </div>
-                    <!-- REEMPLAZA ESTE SRC POR TU ENLACE DE GOOGLE FORM (Asegúrate que termine en /viewform?embedded=true) -->
                     <iframe 
                         id="google-form"
                         src="https://docs.google.com/forms/d/e/1FAIpQLSd3AzSPIHUnGScq7L2C8iiaPEoNM2L1B6ANU0dqwa99VW7kcg/viewform?embedded=true" 
@@ -180,7 +177,7 @@
                 <div class="relative"><div class="absolute -left-[33px] bg-rufinistaBlue w-4 h-4 rounded-full border-4 border-white"></div><h4 class="font-bold">2. 7.15 a.m. Instalación del Foro. Palabras por parte de la rectoría</h4></div>
                 <div class="relative"><div class="absolute -left-[33px] bg-rufinistaYellow w-4 h-4 rounded-full border-4 border-white"></div><h4 class="font-bold italic">3. 7:40 a.m. Ponencias Serial: Presentación de proyectos y experiencias pedagógicas desarrolladas por docentes y estudiantes. </h4></div>
                 <div class="relative"><div class="absolute -left-[33px] bg-rufinistaGreen w-4 h-4 rounded-full border-4 border-white"></div><h4 class="font-bold">4. 9:50 a.m. Descanso</h4></div>
-                <div class="relative"><div class="absolute -left-[33px] bg-rufinistaBlue w-4 h-4 rounded-full border-4 border-white"></div><h4 class="font-bold italic text-rufinistaBlue italic">5. 10:20 a.m. Actividad celular (móvil). Lidera docente Ronald Rojas.</h4></div>
+                <div class="relative"><div class="absolute -left-[33px] bg-rufinistaBlue w-4 h-4 rounded-full border-4 border-white"></div><h4 class="font-bold italic text-rufinistaBlue">5. 10:20 a.m. Actividad celular (móvil). Lidera docente Ronald Rojas.</h4></div>
                 <div class="relative"><div class="absolute -left-[33px] bg-rufinistaYellow w-4 h-4 rounded-full border-4 border-white"></div><h4 class="font-bold italic">6. 11:00 a.m. Presentación cultural. Agrupación dancística Rufinarte.</h4></div>
                 <div class="relative"><div class="absolute -left-[33px] bg-rufinistaGreen w-4 h-4 rounded-full border-4 border-white"></div><h4 class="font-bold">7. 11:30 a.m. Conferencia con Marco Raúl Mejía. </h4></div>
                 <div class="relative"><div class="absolute -left-[33px] bg-rufinistaBlue w-4 h-4 rounded-full border-4 border-white"></div><h4 class="font-bold">8. 12:45 p.m. Receso y traslado a la sede A. </h4></div>
@@ -205,72 +202,72 @@
             
             <div class="bg-white p-6 rounded-3xl shadow-md border-t-4 border-rufinistaGreen">
                 <h3 class="font-black text-rufinistaBlue text-lg mb-3">PONENCIAS DE EXPERIENCIAS</h3>
-                <p class="text-xs text-gray-600 mb-4"> Trabajos de investigación o experienciaS educativas, en estado terminal o en desarrollo. Tiempo: 20 minutos. Preguntas: 10 minutos.</p>
+                <p class="text-xs text-gray-600 mb-4"> Trabajos de investigación o experiencias educativas, en estado terminal o en desarrollo. Tiempo: 20 minutes. Preguntas: 10 minutos.</p>
                 <h3 class="font-black text-rufinistaBlue text-lg mb-3">PÓSTERES</h3>
                 <p class="text-xs text-gray-600 mb-4"> Presentación mediante afiche, cartel o ayuda audiovisual de resultados o avances de una innovación pedagógica o de un trabajo de investigación. Cada póster deberá contener: problema abordado, Experiencia desarrollada, resultados o hallazgos, reflexión pedagógica, recomendaciones. </p>
             </div>
+
             <div class="bg-white p-5 rounded-2xl shadow-sm space-y-4 border border-gray-100 mt-6">
-    <h3 class="text-base font-bold text-[#0F2C59] flex items-center gap-2 mb-2">
-        <i class="fa-solid fa-cloud-arrow-down text-[#7AA95C]"></i> 
-        Plantillas Oficiales de Descarga
-    </h3>
-    <p class="text-xs text-gray-500 mb-4 leading-relaxed">
-        Descarga los formatos oficiales con los márgenes, tipografía y normas técnicas exigidas por el Comité Académico.
-    </p>
+                <h3 class="text-base font-bold text-[#0F2C59] flex items-center gap-2 mb-2">
+                    <i class="fa-solid fa-cloud-arrow-down text-[#7AA95C]"></i> 
+                    Plantillas Oficiales de Descarga
+                </h3>
+                <p class="text-xs text-gray-500 mb-4 leading-relaxed">
+                    Descarga los formatos oficiales con los márgenes, tipografía y normas técnicas exigidas por el Comité Académico.
+                </p>
 
-    <div class="grid grid-cols-1 gap-3">
-        <a href="Plantilla_Ponencias_Foro_Rufinista_APA7.docx" target="_blank" download class="flex items-center justify-between bg-[#0F2C59] text-white p-3 rounded-xl shadow-sm hover:bg-opacity-95 transition">
-            <div class="flex items-center gap-3">
-                <i class="fa-regular fa-file-word text-xl text-blue-300"></i>
-                <div class="text-left">
-                    <p class="text-xs font-bold leading-tight">Plantilla Ponencia (EXP)</p>
-                    <p class="text-[10px] opacity-75">Formato Word • Máx 4 págs</p>
+                <div class="grid grid-cols-1 gap-3">
+                    <a href="Plantilla_Ponencias_Foro_Rufinista_APA7.docx" target="_blank" download class="flex items-center justify-between bg-[#0F2C59] text-white p-3 rounded-xl shadow-sm hover:bg-opacity-95 transition">
+                        <div class="flex items-center gap-3">
+                            <i class="fa-regular fa-file-word text-xl text-blue-300"></i>
+                            <div class="text-left">
+                                <p class="text-xs font-bold leading-tight">Plantilla Ponencia (EXP)</p>
+                                <p class="text-[10px] opacity-75">Formato Word • Máx 4 págs</p>
+                            </div>
+                        </div>
+                        <i class="fa-solid fa-download text-xs opacity-70 mr-1"></i>
+                    </a>
+
+                    <a href="Plantilla_Poster_Foro_Rufinista.docx" target="_blank" download class="flex items-center justify-between bg-[#7AA95C] text-white p-3 rounded-xl shadow-sm hover:bg-opacity-95 transition">
+                        <div class="flex items-center gap-3">
+                            <i class="fa-regular fa-file-lines text-xl text-green-100"></i>
+                            <div class="text-left">
+                                <p class="text-xs font-bold leading-tight">Plantilla Póster (POS)</p>
+                                <p class="text-[10px] opacity-75">Formato Word • Máx 3 págs</p>
+                            </div>
+                        </div>
+                        <i class="fa-solid fa-download text-xs opacity-70 mr-1"></i>
+                    </a>
+
+                    <a href="Plantilla_Presentacion_Ponencias_Rufinista.pptx" target="_blank" download class="flex items-center justify-between bg-white border-2 border-[#0F2C59] text-[#0F2C59] p-3 rounded-xl shadow-sm hover:bg-gray-50 transition">
+                        <div class="flex items-center gap-3">
+                            <i class="fa-regular fa-file-powerpoint text-xl text-orange-500"></i>
+                            <div class="text-left">
+                                <p class="text-xs font-bold leading-tight">Plantilla Diapositivas</p>
+                                <p class="text-[10px] text-gray-500">Formato PowerPoint • Exposición</p>
+                            </div>
+                        </div>
+                        <i class="fa-solid fa-download text-xs text-[#0F2C59] mr-1"></i>
+                    </a>
                 </div>
             </div>
-            <i class="fa-solid fa-download text-xs opacity-70 mr-1"></i>
-        </a>
-
-        <a href="Plantilla_Poster_Foro_Rufinista.docx" target="_blank" download class="flex items-center justify-between bg-[#7AA95C] text-white p-3 rounded-xl shadow-sm hover:bg-opacity-95 transition">
-            <div class="flex items-center gap-3">
-                <i class="fa-regular fa-file-lines text-xl text-green-100"></i>
-                <div class="text-left">
-                    <p class="text-xs font-bold leading-tight">Plantilla Póster (POS)</p>
-                    <p class="text-[10px] opacity-75">Formato Word • Máx 3 págs</p>
-                </div>
-            </div>
-            <i class="fa-solid fa-download text-xs opacity-70 mr-1"></i>
-        </a>
-
-        <a href="Plantilla_Presentacion_Ponencias_Rufinista.pptx" target="_blank" download class="flex items-center justify-between bg-white border-2 border-[#0F2C59] text-[#0F2C59] p-3 rounded-xl shadow-sm hover:bg-gray-50 transition">
-            <div class="flex items-center gap-3">
-                <i class="fa-regular fa-file-powerpoint text-xl text-orange-500"></i>
-                <div class="text-left">
-                    <p class="text-xs font-bold leading-tight">Plantilla Diapositivas</p>
-                    <p class="text-[10px] text-gray-500">Formato PowerPoint • Exposición</p>
-                </div>
-            </div>
-            <i class="fa-solid fa-download text-xs text-[#0F2C59] mr-1"></i>
-        </a>
-    </div>
-</div>
         </section>
 
         <!-- PESTAÑA 4: REGISTRO -->
-<section id="registro" class="tab-content space-y-6 text-center py-12">
-    <div class="bg-white p-8 rounded-2xl shadow-sm max-w-sm mx-auto border-t-4 border-[#E4A934]">
-        <div class="w-16 h-16 bg-yellow-100 text-[#E4A934] flex items-center justify-center rounded-full mx-auto mb-4 text-2xl">
-            <i class="fa-solid fa-file-arrow-up"></i>
-        </div>
-        <h3 class="text-xl font-bold text-[#0F2C59] mb-2">Formulario de Inscripción</h3>
-        <p class="text-sm text-gray-600 mb-6 leading-relaxed">
-            Para registrar tu asistencia o subir tus archivos de Ponencias y Pósteres, abre nuestro formulario oficial seguro.
-        </p>
-        <!-- ¡REEMPLAZA TU_ENLACE_AQUÍ POR EL LINK DE TU FORMS! -->
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSd3AzSPIHUnGScq7L2C8iiaPEoNM2L1B6ANU0dqwa99VW7kcg/viewform?embedded=true" target="_blank" class="block w-full bg-[#0F2C59] text-white font-bold py-3 px-4 rounded-xl shadow-md hover:bg-opacity-90 transition duration-200">
-            <i class="fa-solid fa-arrow-up-right-from-square mr-2"></i> Abrir Formulario
-        </a>
-    </div>
-</section>
+        <section id="registro" class="tab-content space-y-6 text-center py-12">
+            <div class="bg-white p-8 rounded-2xl shadow-sm max-w-sm mx-auto border-t-4 border-[#E4A934]">
+                <div class="w-16 h-16 bg-yellow-100 text-[#E4A934] flex items-center justify-center rounded-full mx-auto mb-4 text-2xl">
+                    <i class="fa-solid fa-file-arrow-up"></i>
+                </div>
+                <h3 class="text-xl font-bold text-[#0F2C59] mb-2">Formulario de Inscripción</h3>
+                <p class="text-sm text-gray-600 mb-6 leading-relaxed">
+                    Para registrar tu asistencia o subir tus archivos de Ponencias y Pósteres, abre nuestro formulario oficial seguro.
+                </p>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSd3AzSPIHUnGScq7L2C8iiaPEoNM2L1B6ANU0dqwa99VW7kcg/viewform" target="_blank" class="block w-full bg-[#0F2C59] text-white font-bold py-3 px-4 rounded-xl shadow-md hover:bg-opacity-90 transition duration-200">
+                    <i class="fa-solid fa-arrow-up-right-from-square mr-2"></i> Abrir Formulario
+                </a>
+            </div>
+        </section>
 
         <!-- SECCIÓN 5: MESAS -->
         <section id="mesas" class="tab-content space-y-6">
@@ -294,30 +291,30 @@
                 <p class="text-blue-100 text-xs italic leading-tight">Tu participación en las mesas construye el manifiesto de nuestra comunidad.</p>
             </div>
         </section>
+
         <!-- PESTAÑA 6: CONTÁCTANOS -->
-<section id="contacto" class="tab-content h-[calc(100vh-180px)] space-y-4">
-    <div class="bg-white p-4 rounded-xl shadow-sm text-center border-b-2 border-[#7AA95C]">
-        <h2 class="text-lg font-bold text-[#0F2C59]">¿Tienes dudas o inconvenientes?</h2>
-        <p class="text-xs text-gray-500">Escríbenos y el Comité Académico Central te responderá lo antes posible.</p>
-    </div>
-    
-    <div class="w-full h-[calc(100%-80px)] bg-white rounded-xl overflow-hidden shadow-inner">
-        <!-- Reemplaza el src de abajo por el de tu Google Forms de contacto (el de Incorporar HTML) -->
-        <iframe 
-            src="https://docs.google.com/forms/d/e/1FAIpQLSfzOLC1fsEm8XiIKKz9H3EbH7LSZ4bJEyNLaKiLFIGGFSCPqw/viewform?embedded=true" 
-            width="100%" 
-            height="100%" 
-            frameborder="0" 
-            marginheight="0" 
-            marginwidth="0">
-            Cargando formulario de contacto...
-        </iframe>
-    </div>
-</section>
+        <section id="contacto" class="tab-content h-[calc(100vh-180px)] space-y-4">
+            <div class="bg-white p-4 rounded-xl shadow-sm text-center border-b-2 border-[#7AA95C]">
+                <h2 class="text-lg font-bold text-[#0F2C59]">¿Tienes dudas o inconvenientes?</h2>
+                <p class="text-xs text-gray-500">Escríbenos y el Comité Académico Central te responderá lo antes posible.</p>
+            </div>
+            
+            <div class="w-full h-[calc(100%-80px)] bg-white rounded-xl overflow-hidden shadow-inner">
+                <iframe 
+                    src="https://docs.google.com/forms/d/e/1FAIpQLSfzOLC1fsEm8XiIKKz9H3EbH7LSZ4bJEyNLaKiLFIGGFSCPqw/viewform?embedded=true" 
+                    width="100%" 
+                    height="100%" 
+                    frameborder="0" 
+                    marginheight="0" 
+                    marginwidth="0">
+                    Cargando formulario de contacto...
+                </iframe>
+            </div>
+        </section>
 
     </main>
 
-<!-- NAVEGACIÓN INFERIOR CORREGIDA -->
+    <!-- NAVEGACIÓN INFERIOR -->
     <nav class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 flex flex-row justify-between items-center px-2 py-1 shadow-[0_-4px_10px_rgba(0,0,0,0.05)] z-50">
         <button onclick="switchTab('inicio', this)" id="btn-inicio" class="active-tab flex flex-col items-center justify-center gap-0.5 text-gray-400 py-1 w-full min-w-0">
             <i class="fa-solid fa-house text-lg"></i>
@@ -340,16 +337,18 @@
             <span class="text-[9px] font-bold tracking-tighter truncate w-full text-center">CONTACTO</span>
         </button>
     </nav>
+
     <script>
         // Función para cambiar de pestaña principal
         function switchTab(tabId, el) {
+            if (!el) return; // Validación de seguridad
+            
             document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
             document.querySelectorAll('nav button').forEach(btn => btn.classList.remove('active-tab'));
             
             document.getElementById(tabId).classList.add('active');
             el.classList.add('active-tab');
 
-            // Si cambiamos de pestaña, nos aseguramos de resetear la vista de registro si estaba abierta
             if(tabId !== 'inicio') {
                 toggleRegistro(false);
             }
