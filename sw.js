@@ -1,4 +1,4 @@
-const CACHE_NAME = 'rufinista-v6';
+const CACHE_NAME = 'rufinista-v7';
 const assets = [
   '/Foro-rufinista-2026/',
   '/Foro-rufinista-2026/index.html',
